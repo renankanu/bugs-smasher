@@ -11,7 +11,7 @@ class GameEngine : Contract.GameEngine {
 
     private val random: Random = Random()
 
-    private var bugs: MutableList<Bug> = ArrayList<Bug>()
+    private var bugs: MutableList<Bug> = ArrayList()
 
     private var score: Int = 0
 
@@ -47,6 +47,8 @@ class GameEngine : Contract.GameEngine {
         gameView?.clearView()
         bugs.clear()
         showNewBugRunnable.run()
+        score = 0
+        gameView?.showScore(score)
     }
 
     override fun onBugCliked(bug: Bug) {

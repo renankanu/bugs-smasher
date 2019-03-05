@@ -14,11 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Contract.GameView {
 
-    private val engine: GameEngine
-
-    init {
-        this.engine = GameEngine()
-    }
+    private val engine: GameEngine = GameEngine()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +26,7 @@ class MainActivity : AppCompatActivity(), Contract.GameView {
         }
 
         this.engine.onGameViewReady(this)
+        gameOver.visibility = View.INVISIBLE
     }
 
     override fun onDestroy() {
@@ -43,8 +40,8 @@ class MainActivity : AppCompatActivity(), Contract.GameView {
         bugView.scaleType = ImageView.ScaleType.FIT_CENTER
         bugView.tag = bug
         bugView.setOnClickListener {
-            it?.let {
-                engine.onBugCliked(it.tag as Bug)
+            it?.let { view ->
+                engine.onBugCliked(view.tag as Bug)
             }
         }
         val bugSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56f, resources.displayMetrics)
